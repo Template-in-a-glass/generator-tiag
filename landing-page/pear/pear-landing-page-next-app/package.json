@@ -8,14 +8,16 @@
     "start": "npm run build && npx -y serve@latest out",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "format": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
-    "postbuild": "next-sitemap"
+    "postbuild": "next-sitemap",
+    "update-ui-library": "( cd ../pear-landing-page-ui-library ; npm run build ; npm pack ) && cp ../pear-landing-page-ui-library/pear-landing-page-ui-library-*.tgz ./lib && rm ../pear-landing-page-ui-library/pear-landing-page-ui-library-*.tgz && rm -rvf .next && npm install ui-library --force"
   },
   "dependencies": {
     "next": "12.2.5",
     "next-seo": "^5.5.0",
     "next-sitemap": "^3.1.21",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "ui-library": "file:lib/pear-landing-page-ui-library-0.0.0.tgz"
   },
   "devDependencies": {
     "@types/node": "18.7.11",
