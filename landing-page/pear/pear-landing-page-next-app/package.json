@@ -9,7 +9,8 @@
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "format": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
     "postbuild": "next-sitemap",
-    "update-ui-library": "( cd ../pear-landing-page-ui-library ; npm run build ; npm pack ) && cp ../pear-landing-page-ui-library/pear-landing-page-ui-library-*.tgz ./lib && rm ../pear-landing-page-ui-library/pear-landing-page-ui-library-*.tgz && rm -rvf .next && npm install ui-library --force"
+    "update-ui-library": "( cd ../pear-landing-page-ui-library ; npm run build ; npm pack ) && cp ../pear-landing-page-ui-library/pear-landing-page-ui-library-*.tgz ./lib && rm ../pear-landing-page-ui-library/pear-landing-page-ui-library-*.tgz && rm -rvf .next && npm install ui-library --force",
+    "update-dependencies": "npx -y npm-check-updates@latest -u"
   },
   "dependencies": {
     "next": "12.2.5",
