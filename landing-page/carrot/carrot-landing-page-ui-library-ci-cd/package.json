@@ -11,7 +11,9 @@
     "cdk": "cdk",
     "update-dependencies": "npx -y npm-check-updates@latest -u",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
-    "format": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix"
+    "format": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
+    "deploy": "npx -y cdk@latest deploy -c gh-owner=helix-web -c gh-repo=carrot-landing-page-ui-library -c stackName=carrot --require-approval never",
+    "destroy": "npx -y cdk@latest destroy carrot"
   },
   "devDependencies": {
     "@types/jest": "^28.1.7",

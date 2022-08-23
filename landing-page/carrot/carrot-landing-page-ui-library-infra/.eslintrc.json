@@ -67,7 +67,8 @@
     ],
     "no-multiple-empty-lines": "error",
     "etc/prefer-interface": "error",
-    "no-new": "off"
+    "no-new": "off",
+    "unicorn/no-array-for-each": "off"
   },
   "settings": {
     "import/resolver": {
