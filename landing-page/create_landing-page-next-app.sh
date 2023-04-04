@@ -1,6 +1,6 @@
 
 # Init Next Project project
-npx -y create-next-app@latest --ts --use-npm $APP_NAME-landing-page-next-app
+npx -y create-next-app@latest --ts --eslint --experimental-app --src-dir --tailwind --use-npm --import-alias "@/*" $APP_NAME-landing-page-next-app
 cd $APP_NAME-landing-page-next-app
 
 # Install estlint and vscode plugin and settings
@@ -8,22 +8,18 @@ mkdir .vscode
 curl -o .vscode/extensions.json https://raw.githubusercontent.com/Template-in-a-glass/template-landing-page-next-app/main/.vscode/extensions.json
 curl -o .vscode/settings.json https://raw.githubusercontent.com/Template-in-a-glass/template-landing-page-next-app/main/.vscode/settings.json
 
-npm install @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-airbnb eslint-import-resolver-typescript eslint-plugin-etc eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-unicorn --save-dev
+npm install --save-dev  @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-airbnb eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-jsx eslint-plugin-react eslint-plugin-react-hooks @types/node @types/react @types/react-dom eslint eslint-config-next typescript
 
 curl -o .eslintignore https://raw.githubusercontent.com/Template-in-a-glass/template-landing-page-next-app/main/.eslintignore
 curl -o .eslintrc.json https://raw.githubusercontent.com/Template-in-a-glass/template-landing-page-next-app/main/.eslintrc.json
 npm pkg set scripts.lint="eslint ./src --ext .js,.jsx,.ts,.tsx"
-npm pkg set scripts.format="eslint ./src --ext .js,.jsx,.ts,.tsx --fix"
 
 git add .
 git commit -m "Install estlint and vscode plugin and settings"
 
 # Clean boilerplate
-rm -rvf ./pages
-rm -rvf ./styles
-rm -rvf ./public/vercel.svg
-mkdir src
-mkdir data
+rm -f public/**
+rm -f src/app/globals.css src/app/page.module.css 
 
 git add .
 git commit -m "Clean boilerplate"
