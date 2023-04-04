@@ -1,6 +1,6 @@
 
 # Init Next Project project
-npx -y create-next-app@latest --ts --eslint --experimental-app --src-dir --tailwind --use-npm --import-alias "@/*" $APP_NAME-landing-page-next-app
+npx -y create-next-app@latest --ts --eslint --experimental-app --src-dir --use-npm --import-alias "@/*" $APP_NAME-landing-page-next-app
 cd $APP_NAME-landing-page-next-app
 
 # Install estlint and vscode plugin and settings
@@ -25,7 +25,7 @@ git add .
 git commit -m "Clean boilerplate"
 
 # Install Next SEO
-npm install next-seo next-sitemap --save
+npm install next-sitemap --save
 curl -o next-sitemap.config.js https://raw.githubusercontent.com/Template-in-a-glass/template-landing-page-next-app/main/next-sitemap.config.js
 npm pkg set scripts.postbuild="next-sitemap"
 echo public/sitemap* >> .gitignore
@@ -33,29 +33,6 @@ echo public/robots.txt >> .gitignore
 
 git add .
 git commit -m "Install Next SEO"
-
-# Install Next Export Optimize Images
-npm install next-export-optimize-images --save-dev
-curl -o next.config.js https://raw.githubusercontent.com/Template-in-a-glass/template-landing-page-next-app/main/next.config.js
-npm pkg set scripts.build="next lint && next build && next export && next-export-optimize-images"
-npm pkg set scripts.start="npm run build && npx -y serve@latest out"
-
-git add .
-git commit -m "Install Next Export Optimize Images"
-
-# Install the UI Library (manual, need use package repository later)
-( cd ../$APP_NAME-landing-page-ui-library ; npm pack )
-mkdir lib
-cp ../$APP_NAME-landing-page-ui-library/$APP_NAME-landing-page-ui-library-*.tgz ./lib
-rm ../$APP_NAME-landing-page-ui-library/$APP_NAME-landing-page-ui-library-*.tgz
-npm install ./lib/*.tgz
-npx -y replace-in-files-cli@latest --string='""$APP_NAME-landing-page-ui-library""' --replacement='""ui-library""' package.json
-npm pkg set scripts.update-ui-library="( cd ../$APP_NAME-landing-page-ui-library ; npm run build ; npm pack ) && cp ../$APP_NAME-landing-page-ui-library/$APP_NAME-landing-page-ui-library-*.tgz ./lib && rm ../$APP_NAME-landing-page-ui-library/$APP_NAME-landing-page-ui-library-*.tgz && rm -rvf .next && npm install ui-library --force"
-npm run update-ui-library
-
-echo lib >> .gitignore
-git add .
-git commit -m "Install the UI Library"
 
 # Update all libraries (can be dangerous)
 npm pkg set scripts.update-dependencies="npx -y npm-check-updates@latest -u"
