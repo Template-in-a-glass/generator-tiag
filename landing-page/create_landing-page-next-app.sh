@@ -7,7 +7,7 @@ cd $APP_NAME-landing-page-next-app
 npm install --save-dev @commitlint/cli @commitlint/config-conventional
 curl -o commitlint.config.ts https://raw.githubusercontent.com/Template-in-a-glass/template-landing-page-next-app/main/commitlint.config.ts
 git add .
-git commit -m "chore: Init Conventional Commit"
+git commit -m "chore: init Conventional Commit"
 
 # Install estlint and vscode plugin and settings
 mkdir .vscode
@@ -20,7 +20,7 @@ npm install --save-dev @typescript-eslint/eslint-plugin @typescript-eslint/parse
 curl -o .eslintrc.json https://raw.githubusercontent.com/Template-in-a-glass/template-landing-page-next-app/main/.eslintrc.json
 
 git add .
-git commit -m "chore: Install estlint and vscode plugin and settings"
+git commit -m "chore: install estlint and vscode plugin and settings"
 
 # Clean boilerplate
 
@@ -30,7 +30,7 @@ rm -f public/**
 rm -f src/app/globals.css src/app/page.module.css 
 
 git add .
-git commit -m "chore: Clean boilerplate"
+git commit -m "chore: clean boilerplate"
 
 # Update all libraries (can be dangerous)
 npm pkg set scripts.update-dependencies="npx -y npm-check-updates@latest -u"
@@ -38,13 +38,13 @@ npm run update-dependencies
 npm install
 
 git add .
-git commit -m "chore: Update all libraries"
+git commit -m "chore: update all libraries"
 
 # Download the code template
 curl https://codeload.github.com/Template-in-a-glass/template-landing-page-next-app/tar.gz/main | tar -xz --strip=1 template-landing-page-next-app-main/src/app
 
 git add .
-git commit -m "chore: Download the code template"
+git commit -m "chore: download the code template"
 
 # Install husky
 npm install husky --save-dev
@@ -54,20 +54,21 @@ npx -y husky@latest add .husky/pre-commit "npm run lint"
 npx -y husky@latest add .husky/pre-push "npm run lint && npm run build"
 
 # Init Husky
+npm pkg set scripts.test="echo \"Error: no test specified\" && exit 1"
 npm install --save-dev husky
 npm pkg set scripts.prepare="husky install"
 npm run prepare
 npx -y husky@latest add .husky/commit-msg "npx --no -- commitlint --edit ${1}"
-npx -y husky@latest add .husky/pre-commit "npm run lint"
 npx -y husky@latest add .husky/pre-push "npm run lint && npm run build"
 npx -y husky@latest add .husky/pre-commit "
 branch=\$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')\
+
 if [ "\$branch" == "main" ]
 then
     npm run test;
 fi"
 git add .
-git commit -m "chore: Init Husky"
+git commit -m "chore: init Husky"
 
 # Set up git and project ready commit
 # echo .dccache >> .gitignore
