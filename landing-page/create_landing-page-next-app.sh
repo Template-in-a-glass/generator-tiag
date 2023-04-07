@@ -53,8 +53,21 @@ npm run prepare
 npx -y husky@latest add .husky/pre-commit "npm run lint"
 npx -y husky@latest add .husky/pre-push "npm run lint && npm run build"
 
+# Init Husky
+npm install --save-dev husky
+npm pkg set scripts.prepare="husky install"
+npm run prepare
+npx -y husky@latest add .husky/commit-msg "npx --no -- commitlint --edit ${1}"
+npx -y husky@latest add .husky/pre-commit "npm run lint"
+npx -y husky@latest add .husky/pre-push "npm run lint && npm run build"
+npx -y husky@latest add .husky/pre-commit "
+branch=\$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')\
+if [ "\$branch" == "main" ]
+then
+    npm run test;
+fi"
 git add .
-git commit -m "chore: Install husky"
+git commit -m "chore: Init Husky"
 
 # Set up git and project ready commit
 # echo .dccache >> .gitignore
