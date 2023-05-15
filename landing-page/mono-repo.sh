@@ -3,19 +3,28 @@
 npx -y create-turbo@latest ./$APP_NAME pnpm  -e with-tailwind
 cd $APP_NAME
 
+# Init Git
+git add .
+git commit -m "chore: downloaded template"
+
 # Init Conventional Commit
 pnpm install --save-dev -w @commitlint/cli @commitlint/config-conventional
 curl -o commitlint.config.ts https://raw.githubusercontent.com/Template-in-a-glass/template-mono-repo/main/config/commitlint.config.ts
 git add .
 git commit -m "chore: init Conventional Commit"
 
-# Install estlint and vscode plugin and settings
+# Install estlint, prettier and vscode plugin and settings
+cd packages/eslint-config-custom
+pnpm install prettier-plugin-tailwindcss 
+curl -o ./prettier.config.js https://raw.githubusercontent.com/Template-in-a-glass/template-mono-repo/main/config/prettier.config.js
+pnpm install next @typescript-eslint/eslint-plugin eslint-config-airbnb eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-import eslint-plugin-jsx-a11y
+curl -o ./index.js https://raw.githubusercontent.com/Template-in-a-glass/template-mono-repo/main/config/eslintrc.js
+cd ../..
+
 mkdir .vscode
 curl -o .vscode/extensions.json https://raw.githubusercontent.com/Template-in-a-glass/template-mono-repo/main/config/.vscode/extensions.json
-curl -o .vscode/settings.json https://raw.githubusercontent.com/Template-in-a-glass/template-mono-rep/main/config/.vscode/settings.json
+curl -o .vscode/settings.json https://raw.githubusercontent.com/Template-in-a-glass/template-mono-repo/main/config/.vscode/settings.json
 
-cd packages/eslint-config-custom
-pnpm install @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-airbnb eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-jsx eslint-plugin-react eslint-plugin-react-hooks
 
 # curl -o .eslintignore https://raw.githubusercontent.com/Template-in-a-glass/template-landing-page-next-app/main/.eslintignore
 curl -o .eslintrc.json https://raw.githubusercontent.com/Template-in-a-glass/template-landing-page-next-app/main/.eslintrc.json
