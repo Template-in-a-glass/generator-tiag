@@ -2,17 +2,20 @@
 # Init Mono Repo project
 npx -y create-turbo@latest ./$APP_NAME pnpm  -e with-tailwind
 cd $APP_NAME
+git init
+git add .
+git commit -m "chore: init"
 pnpm run build
 
 # Init Conventional Commit
 pnpm install --save-dev -w @commitlint/cli @commitlint/config-conventional
-curl -o commitlint.config.ts https://raw.githubusercontent.com/Template-in-a-glass/template-mono-repo/main/config/commitlint.config.ts
+curl -o commitlint.config.js https://raw.githubusercontent.com/Template-in-a-glass/template-mono-repo/main/config/commitlint.config.js
 git add .
 git commit -m "chore: init Conventional Commit"
 
 # Install estlint, prettier and vscode plugin and settings
 cd packages/eslint-config-custom
-pnpm install prettier-plugin-tailwindcss next eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-prettier @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier eslint-plugin-next eslint-plugin-jsx-a11y
+pnpm install prettier-plugin-tailwindcss @typescript-eslint/eslint-plugin eslint-plugin-security   
 curl -o ./index.js https://raw.githubusercontent.com/Template-in-a-glass/template-mono-repo/main/config/eslintrc.js
 curl -o ./prettier.config.js https://raw.githubusercontent.com/Template-in-a-glass/template-mono-repo/main/config/prettier.config.js
 cd ../..
